@@ -1,9 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import Routes from './routes'
+
+import './App.css'
 
 export default function App() {
   return (
-    <h1>Olá Mundo</h1>
+    < Routes/>
   );
 }
 
