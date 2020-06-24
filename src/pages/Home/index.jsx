@@ -6,8 +6,8 @@ import './style.css'
 
 export default function Home (){
     return (
-    
-        <header id="header" class="fixed-top">
+      <>
+        <header id="header" className="fixed-top">
           <div class="container d-flex align-items-center">
       
             <Link href="index.html" 
@@ -19,8 +19,8 @@ export default function Home (){
             <nav class="nav-menu d-none d-lg-block">
               <ul>
                 <li class="active"><Link href="index.html">Home</Link></li>
-                <li><Link href="#about">About</Link></li>
-                <li><Link href="#services">Services</Link></li>
+                <li><Link href="#about">Sobre</Link></li>
+                <li><Link href="#services">Serviços</Link></li>
                 <li><Link href="#portfolio">Portfolio</Link></li>
                 <li><Link href="#team">Team</Link></li>
                 <li class="drop-down"><Link href="">Drop Down</Link>
@@ -47,6 +47,8 @@ export default function Home (){
       
           </div>
         </header>
-    
+
+        <h1>Olá mundo</h1>
+      </>
     )
 }
