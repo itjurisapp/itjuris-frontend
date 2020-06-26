@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Logo from '../../assets/img/itjuris_logo.svg'
+
 import './style.css'
 
 export default function Home (){
@@ -11,9 +13,8 @@ export default function Home (){
           <div className="container d-flex align-items-center">
       
             <Link href="index.html" 
-             className="logo mr-auto">
-               <h2>ItJuris</h2>
-              {/* <img src={}alt="" className="img-fluid"/> */}
+            className="logo mr-auto">
+              <img src={Logo}  alt="Logo" className="img-fluid"/> 
             </Link>
       
             <nav className="nav-menu d-none d-lg-block">
