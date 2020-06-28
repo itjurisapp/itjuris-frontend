@@ -1,6 +1,11 @@
 import React,{useState} from 'react'
 import NavBar from '../../components/navbar/index'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+/*import { pt } from 'date-fns/locale'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'*/
+
 import './style.css'
 
 import api from '../../services/api'
@@ -20,58 +25,69 @@ export default function Register_BasicDatas () {
 
     async function handleRegister_BasicDatas (e){
       e.preventDefault();
-
-      const data = {
-        proceduralClass,
-        codeLocation,
-        competence,
-        linkedProcess,
-        bindingProcessModality,
-        priority,
-        lawsuitValue,
-        legalAssistance,
-        secrecyLevel,
-        dataAjuizamento,
-        otherParameter
-
-      };
-      console.log(data)
-      try {
-        await api.post('/register-basic-datas', data)
-        alert('Cadastro realizado com sucesso...')
-      } catch (error) {
-        alert('erro no cadastro, tente novamente...')
+      e.target.reset();
+      
+        const response = {
+          proceduralClass,
+          codeLocation,
+          competence,
+          linkedProcess,
+          bindingProcessModality,
+          priority,
+          lawsuitValue,
+          legalAssistance,
+          secrecyLevel,
+          dataAjuizamento,
+          otherParameter  
+        }
+        
+        try{
+        await api.post('basic-datas', {
+          
+          headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(response)
+        })
+        console.log({response})
+        alert('cadastro realizado com sucesso')
+      }catch(error) {
+        alert('erro no cadastro, tente novamente')
       }
-
+      setProceduralClass('')
     }
+    
     return (
         <>
             < NavBar />
 
-            <section id="hero">
+            <section>
                 <div className="container"> 
-                  <h1>Cadastrar Processos</h1>
+                  <h2>Cadastrar Processos</h2>
 
                 <form onSubmit={handleRegister_BasicDatas}>
                     <div className="form-row">
                       <div className="form-group col-md-6">
                         <label>Número Indentificador da classe processual</label>
                         <input 
-                         type="text" 
+                          
                          className="form-control" 
                          placeholder="Digite um número"
                          name={ proceduralClass }
-                         onChange={ e => setProceduralClass( e.target.value)}
+
+                         onChange={ e => setProceduralClass(e.target.value)}
                         />
                       </div>
                       <div className="form-group col-md-6">
                         <label>Código de localização</label>
                         <input 
-                         type="text" 
+                         
                          className="form-control" 
                          placeholder="digite o código de localização"
                          name={ codeLocation }
-                         onChange={ e => setCodeLocation(e.target.value)}
+                         
+                         onChange={ e => setCodeLocation(parseInt(e.target.value))}
                         />
                       </div>
 
@@ -80,20 +96,22 @@ export default function Register_BasicDatas () {
                     <div className="form-group col-md-6">
                       <label>Competência</label>
                       <input 
-                        type="text" 
+                        
                         className="form-control"
                         placeholder="Digite o identificador da competência"
                         name={ competence }
-                        onChange={ e => setCompetence(e.target.value)}
+                        
+                        onChange={ e => setCompetence(parseInt(e.target.value))}
                       />
                     </div>
                     <div className="form-group col-md-6">
                       <label>Processo vinculado</label>
                       <input 
-                       type="text"
+                       
                        className="form-control"
                        placeholder="Digite o processo vinculado"
                        name={ linkedProcess }
+                       
                        onChange={ e => setLinkedprocess(e.target.value)}
                       />
                     </div>
@@ -102,20 +120,23 @@ export default function Register_BasicDatas () {
                       <div className="form-group col-md-6">
                         <label>Modalidade vinculação processo</label>
                         <input 
-                         type="text"
+                         
                          className="form-control" 
                          placeholder="Digite o identificador de processos"
                          name={ bindingProcessModality}
+                        
                          onChange={ e => SetBindingProcessModality(e.target.value)}
                         />
                       </div>
                       <div className="form-group col-md-6">
                         <label>Prioridade</label>
-                        <input type="text"
+                        <input 
+
                          className="form-control"
                          placeholder="Digite a prioridade"
                          name={ priority } 
-                         onChange={ e => sePriority(e.target.value)}
+                         
+                         onChange={ e => sePriority(parseInt(e.target.value))}
                         />
                       </div>
                     
@@ -124,40 +145,63 @@ export default function Register_BasicDatas () {
                       <div className="form-group col-md-6">
                         <label>Valor causa</label>
                         <input 
-                         type="text"
+                         
                          className="form-control" 
                          placeholder="Digite o valor da relação jurídica"
                          name={ lawsuitValue } 
-                         onChange={ e => setLawsuitValue(e.target.value)}
+                         
+                         onChange={ e => setLawsuitValue(parseInt(e.target.value))}
                         />
                       </div>
                       <div className="form-group col-md-6">
-                        <label>Assistência judiciária</label>
-                        <input type="text"
-                         className="form-control"
-                         placeholder="ex: sim ou não"
-                         name={ legalAssistance }
-                         onChange={ e => setLegalAssistance(e.target.value)}
-                        />
+                        <label>Assistência judiciária</label><br/>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input 
+                          type="radio" 
+                          class="custom-control-input" 
+                          id="sim" 
+                          name="legalAssistance"
+                          value={true}
+                          checked={legalAssistance === 'sim'}
+                          onChange={ e => setLegalAssistance(Boolean(e.target.value) )}
+                          />
+                          <label class="custom-control-label" htmlFor="sim">sim</label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input 
+                          type="radio" 
+                          class="custom-control-input" 
+                          id="nao" 
+                          name="legalAssistance"
+                          value={false}
+                          checked={legalAssistance === 'nao'}
+                          onChange={ e => setLegalAssistance(Boolean(e.target.value ))}
+                          />
+                          <label class="custom-control-label" htmlFor="nao">não</label>
+                       </div>
                       </div>
                       </div>
                     <div className="form-row">
                     <div className="form-group col-md-6">
                       <label>Nível de sigilo</label>
                       <input 
-                       type="text"
+                       
                        className="form-control" 
                        placeholder="Digite o valor da relação jurídica"
                        name={ secrecyLevel }
-                       onChange={ e => setSecrecyLevel(e.target.value)}
+                       
+                       onChange={ e => setSecrecyLevel(parseInt(e.target.value))}
                       />
                     </div>
-                    <div className="form-group col-md-6">
-                      <label>Data de Ajuizamento</label>
-                      <input type="text"
-                       className="form-control"
-                       placeholder="Digite a data de autuação do processo "
-                       name={dataAjuizamento}
+                    <div className="form-group col-md-5">
+                      <label>Data de Ajuizamento</label><br/>
+                      <input 
+                       
+                       className="form-control" 
+                       placeholder="Digite o valor da relação jurídica"
+                       name={ dataAjuizamento }
+                      
                        onChange={ e => setDataAjuizamento(e.target.value)}
                       />
                     </div>
@@ -165,19 +209,18 @@ export default function Register_BasicDatas () {
                     <div className="form-group">
                       <label>Outros parâmetros</label>
                       <input 
-                       type="text"
+                       
                        className="form-control" 
                        placeholder="Digite a situação do processo"
                        name={otherParameter}
+                       
                        onChange={ e => setOtherParameter(e.target.value)}
                       />
                     </div>
-                    <button className="btn btn-primary btn-lg btn-block">Salvar Processos</button>
+                    <button type="submit" className="btn btn-primary btn-lg btn-block">Salvar Processos</button>
                   </form>
-                  
                 </div>
             </section>
         </>
-
     )
 }
