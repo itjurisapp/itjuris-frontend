@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;600;700;900&family=MuseoModerno:wght@900&family=Revalia&display=swap');
 #header {
     background: #fff;
     transition: all 0.5s;
@@ -11,10 +12,9 @@
     margin: 0;
     padding: 0;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: "Lato", sans-serif;
+    font-family: 'Revalia', cursive;
   }
   
   #header .logo Link {
@@ -24,4 +24,5 @@
   #header .logo img {
     max-height: 40px;
   }
+  
   
